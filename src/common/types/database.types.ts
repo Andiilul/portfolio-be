@@ -4,6 +4,7 @@ export type Nullable<T> = T | null;
 
 export type PortfolioStatus = 'draft' | 'published' | 'archived';
 export type ProjectStatus = 'draft' | 'published' | 'archived';
+export type ContactMessageStatus = 'new' | 'read' | 'replied' | 'archived';
 export type LinkType =
   | 'github'
   | 'linkedin'

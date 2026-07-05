@@ -20,6 +20,7 @@ export const mapPortfolioRow = (row: PortfolioRow): Portfolio => ({
   targetRole: row.target_role,
   status: row.status,
   isDefault: row.is_default ?? false,
+  displayOrder: row.display_order ?? 0,
   createdAt: row.created_at,
   updatedAt: row.updated_at,
   publishedAt: row.published_at,

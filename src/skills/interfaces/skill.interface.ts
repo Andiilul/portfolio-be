@@ -8,6 +8,7 @@ export interface SkillCategory {
   id: UUID;
   name: string;
   description: Nullable<string>;
+  displayOrder: number;
   createdAt: ISODateString;
   updatedAt: ISODateString;
 }
@@ -16,6 +17,7 @@ export interface SkillCategoryRow {
   id: UUID;
   name: string;
   description: Nullable<string>;
+  display_order: Nullable<number>;
   created_at: ISODateString;
   updated_at: ISODateString;
 }
@@ -26,6 +28,7 @@ export interface Skill {
   description: Nullable<string>;
   category: SkillCategory;
   proficiencyLevel: number;
+  displayOrder: number;
   createdAt: ISODateString;
   updatedAt: ISODateString;
 }
@@ -37,6 +40,7 @@ export interface SkillRow {
   category_id: UUID;
   category?: SkillCategoryRow;
   proficiency_level: number;
+  display_order: Nullable<number>;
   created_at: ISODateString;
   updated_at: ISODateString;
 }

@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { createApiResponse } from '../common/helpers/api-response.helper';
 import { TechnologiesService } from './technologies.service';
 
@@ -14,8 +15,8 @@ export class TechnologiesController {
     status: 200,
     description: 'Technologies retrieved successfully.',
   })
-  async findAll() {
-    const technologies = await this.technologiesService.findAll();
+  async findAll(@Query() query: PaginationQueryDto) {
+    const technologies = await this.technologiesService.findAll(query);
 
     return createApiResponse(
       'Technologies retrieved successfully.',

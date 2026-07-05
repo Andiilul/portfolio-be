@@ -12,6 +12,7 @@ export const mapProjectRow = (row: ProjectRow): Project => ({
   liveUrl: row.live_url,
   image: row.image ? mapMediaFileRow(row.image) : null,
   status: row.status,
+  displayOrder: row.display_order ?? 0,
   technologies: (row.project_technologies ?? [])
     .map((projectTechnology) => projectTechnology.technology)
     .filter((technology) => Boolean(technology))

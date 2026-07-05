@@ -89,27 +89,31 @@ values
   )
 on conflict (id) do nothing;
 
-insert into technologies (id, name, description)
+insert into technologies (id, name, description, display_order)
 values
   (
     '00000000-0000-4000-8000-000000000020',
     'Next.js',
-    'React framework untuk aplikasi frontend modern.'
+    'React framework untuk aplikasi frontend modern.',
+    0
   ),
   (
     '00000000-0000-4000-8000-000000000021',
     'NestJS',
-    'Node.js framework untuk backend yang modular.'
+    'Node.js framework untuk backend yang modular.',
+    1
   ),
   (
     '00000000-0000-4000-8000-000000000022',
     'Supabase',
-    'Backend platform berbasis PostgreSQL.'
+    'Backend platform berbasis PostgreSQL.',
+    2
   ),
   (
     '00000000-0000-4000-8000-000000000023',
     'Tailwind CSS',
-    'Utility-first CSS framework.'
+    'Utility-first CSS framework.',
+    3
   )
 on conflict (id) do nothing;
 
@@ -122,7 +126,8 @@ insert into projects (
   github_url,
   live_url,
   image_id,
-  status
+  status,
+  display_order
 )
 values
   (
@@ -134,7 +139,8 @@ values
     'https://github.com/yourusername/targeted-portfolio-cms',
     null,
     '00000000-0000-4000-8000-000000000003',
-    'published'
+    'published',
+    0
   ),
   (
     '00000000-0000-4000-8000-000000000031',
@@ -145,7 +151,8 @@ values
     'https://github.com/yourusername/backend-api-platform',
     null,
     '00000000-0000-4000-8000-000000000004',
-    'published'
+    'published',
+    1
   )
 on conflict (id) do nothing;
 
@@ -169,68 +176,77 @@ values
   )
 on conflict (project_id, technology_id) do nothing;
 
-insert into skill_categories (id, name, description)
+insert into skill_categories (id, name, description, display_order)
 values
   (
     '00000000-0000-4000-8000-000000000040',
     'Frontend',
-    'Kemampuan membangun user interface dan pengalaman pengguna.'
+    'Kemampuan membangun user interface dan pengalaman pengguna.',
+    0
   ),
   (
     '00000000-0000-4000-8000-000000000041',
     'Backend',
-    'Kemampuan membangun API, database, dan service layer.'
+    'Kemampuan membangun API, database, dan service layer.',
+    1
   ),
   (
     '00000000-0000-4000-8000-000000000042',
     'Product',
-    'Kemampuan menerjemahkan kebutuhan menjadi fitur yang jelas.'
+    'Kemampuan menerjemahkan kebutuhan menjadi fitur yang jelas.',
+    2
   )
 on conflict (id) do nothing;
 
-insert into skills (id, name, description, category_id, proficiency_level)
+insert into skills (id, name, description, category_id, proficiency_level, display_order)
 values
   (
     '00000000-0000-4000-8000-000000000050',
     'Frontend Development',
     'Membangun UI responsif, reusable component, dan halaman yang nyaman dipakai.',
     '00000000-0000-4000-8000-000000000040',
-    4
+    4,
+    0
   ),
   (
     '00000000-0000-4000-8000-000000000051',
     'Backend API Design',
     'Merancang endpoint, module, dan struktur data backend yang mudah dikembangkan.',
     '00000000-0000-4000-8000-000000000041',
-    4
+    4,
+    1
   ),
   (
     '00000000-0000-4000-8000-000000000052',
     'Database Modeling',
     'Mendesain relasi data untuk kebutuhan aplikasi nyata.',
     '00000000-0000-4000-8000-000000000041',
-    3
+    3,
+    2
   ),
   (
     '00000000-0000-4000-8000-000000000053',
     'Feature Planning',
     'Memecah ide produk menjadi scope fitur yang bisa dikerjakan bertahap.',
     '00000000-0000-4000-8000-000000000042',
-    4
+    4,
+    3
   )
 on conflict (id) do nothing;
 
-insert into experience_types (id, name, description)
+insert into experience_types (id, name, description, display_order)
 values
   (
     '00000000-0000-4000-8000-000000000060',
     'Freelance',
-    'Pengalaman project mandiri atau client.'
+    'Pengalaman project mandiri atau client.',
+    0
   ),
   (
     '00000000-0000-4000-8000-000000000061',
     'Personal Project',
-    'Pengalaman membangun produk pribadi.'
+    'Pengalaman membangun produk pribadi.',
+    1
   )
 on conflict (id) do nothing;
 
@@ -259,7 +275,7 @@ values
     true,
     'Remote',
     null,
-    1
+    0
   )
 on conflict (id) do nothing;
 
@@ -273,6 +289,7 @@ insert into portfolios (
   target_role,
   status,
   is_default,
+  display_order,
   published_at
 )
 values
@@ -286,6 +303,7 @@ values
     'Frontend Developer',
     'published',
     true,
+    0,
     now()
   ),
   (
@@ -298,6 +316,7 @@ values
     'Backend Developer',
     'published',
     false,
+    1,
     now()
   )
 on conflict (id) do nothing;

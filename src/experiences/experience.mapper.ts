@@ -12,6 +12,7 @@ export const mapExperienceTypeRow = (
   id: row.id,
   name: row.name,
   description: row.description,
+  displayOrder: row.display_order ?? 0,
   createdAt: row.created_at,
   updatedAt: row.updated_at,
 });
@@ -27,6 +28,7 @@ export const mapExperienceRow = (row: ExperienceRow): Experience => ({
         id: row.type_id,
         name: 'Other',
         description: null,
+        displayOrder: 0,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
       },

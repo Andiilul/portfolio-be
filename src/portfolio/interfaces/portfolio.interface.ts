@@ -21,6 +21,7 @@ export interface Portfolio {
   targetRole: Nullable<string>;
   status: PortfolioStatus;
   isDefault: boolean;
+  displayOrder: number;
   createdAt: ISODateString;
   updatedAt: ISODateString;
   publishedAt: Nullable<ISODateString>;
@@ -36,6 +37,7 @@ export interface PortfolioRow {
   target_role: Nullable<string>;
   status: PortfolioStatus;
   is_default: Nullable<boolean>;
+  display_order: Nullable<number>;
   created_at: ISODateString;
   updated_at: ISODateString;
   published_at: Nullable<ISODateString>;

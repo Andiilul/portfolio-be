@@ -12,6 +12,7 @@ export interface ExperienceType {
   id: UUID;
   name: string;
   description: Nullable<string>;
+  displayOrder: number;
   createdAt: ISODateString;
   updatedAt: ISODateString;
 }
@@ -20,6 +21,7 @@ export interface ExperienceTypeRow {
   id: UUID;
   name: string;
   description: Nullable<string>;
+  display_order: Nullable<number>;
   created_at: ISODateString;
   updated_at: ISODateString;
 }

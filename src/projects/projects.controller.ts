@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import {
   ApiOperation,
   ApiParam,
@@ -6,6 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { createApiResponse } from '../common/helpers/api-response.helper';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { ProjectsService } from './projects.service';
 
 @ApiTags('Projects')
@@ -16,8 +17,8 @@ export class ProjectsController {
   @Get()
   @ApiOperation({ summary: 'List published projects' })
   @ApiResponse({ status: 200, description: 'Projects retrieved successfully.' })
-  async findAll() {
-    const projects = await this.projectsService.findAll();
+  async findAll(@Query() query: PaginationQueryDto) {
+    const projects = await this.projectsService.findAll(query);
 
     return createApiResponse('Projects retrieved successfully.', projects);
   }

@@ -23,6 +23,7 @@ export interface Project {
   liveUrl: Nullable<string>;
   image: Nullable<MediaFile>;
   status: ProjectStatus;
+  displayOrder: number;
   technologies: Technology[];
   createdAt: ISODateString;
   updatedAt: ISODateString;
@@ -39,6 +40,7 @@ export interface ProjectRow {
   image_id: Nullable<UUID>;
   image?: Nullable<MediaFileRow>;
   status: ProjectStatus;
+  display_order: Nullable<number>;
   project_technologies?: ProjectTechnologyRow[];
   created_at: ISODateString;
   updated_at: ISODateString;

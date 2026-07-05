@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { createApiResponse } from '../common/helpers/api-response.helper';
 import { SkillsService } from './skills.service';
 
@@ -11,8 +12,8 @@ export class SkillsController {
   @Get()
   @ApiOperation({ summary: 'List skills with categories' })
   @ApiResponse({ status: 200, description: 'Skills retrieved successfully.' })
-  async findAll() {
-    const skills = await this.skillsService.findAll();
+  async findAll(@Query() query: PaginationQueryDto) {
+    const skills = await this.skillsService.findAll(query);
 
     return createApiResponse('Skills retrieved successfully.', skills);
   }

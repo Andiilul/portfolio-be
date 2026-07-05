@@ -1,4 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { createPaginatedData } from '../common/helpers/api-response.helper';
+import { PaginatedData } from '../common/types/pagination.type';
 import { SupabaseService } from '../supabase/supabase.service';
 import { Project } from './interfaces/project.interface';
 import { mapProjectRow } from './project.mapper';
@@ -7,8 +10,13 @@ import { mapProjectRow } from './project.mapper';
 export class ProjectsService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async findAll(): Promise<Project[]> {
-    const { data, error } = await this.supabaseService.client
+  async findAll(query: PaginationQueryDto): Promise<PaginatedData<Project>> {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 10;
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
+    const { data, error, count } = await this.supabaseService.client
       .from('projects')
       .select(
         `
@@ -19,15 +27,23 @@ export class ProjectsService {
             technology:technologies(*)
           )
         `,
+        { count: 'exact' },
       )
       .eq('status', 'published')
-      .order('created_at', { ascending: false });
+      .order('display_order', { ascending: true })
+      .order('created_at', { ascending: false })
+      .range(from, to);
 
     if (error) {
       throw error;
     }
 
-    return (data ?? []).map(mapProjectRow);
+    return createPaginatedData(
+      (data ?? []).map(mapProjectRow),
+      page,
+      limit,
+      count ?? 0,
+    );
   }
 
   async findBySlug(slug: string): Promise<Project> {
